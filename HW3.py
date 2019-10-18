@@ -1,5 +1,5 @@
-#HW3
-#Due Date: 11/03/2019, 11:59PM 
+# HW3
+# Due Date: 11/03/2019, 11:59PM
 '''
 Team members:
 
@@ -7,18 +7,19 @@ Collaboration Statement:
 
 '''
 
+
 class Node:
     def __init__(self, value):
-        self.value = value  
-        self.next = None 
-    
+        self.value = value
+        self.next = None
+
     def __str__(self):
-        return "Node({})".format(self.value) 
+        return "Node({})".format(self.value)
 
     __repr__ = __str__
-                          
 
-#=============================================== Part I ==============================================
+
+# =============================================== Part I ==============================================
 
 class Stack:
     '''
@@ -45,44 +46,43 @@ class Stack:
         >>> x.peek()
         4
     '''
+
     def __init__(self):
         self.top = None
-        self.count=0
-        
-    
+        self.count = 0
+
     def __str__(self):
-        temp=self.top
-        out=[]
+        temp = self.top
+        out = []
         while temp:
             out.append(str(temp.value))
-            temp=temp.next
-        out='\n'.join(out)
-        return ('Top:{}\nStack:\n{}'.format(self.top,out))
+            temp = temp.next
+        out = '\n'.join(out)
+        return ('Top:{}\nStack:\n{}'.format(self.top, out))
 
-    __repr__=__str__
+    __repr__ = __str__
 
     def isEmpty(self):
         if self.top == None:
-        	return True
+            return True
         else:
-        	return False
+            return False
 
-    def __len__(self): 
+    def __len__(self):
         return self.count
 
-    def push(self,value):
-    	self.count += 1
-    	if self.top == None:
-    		self.top = Node(value)
-    	else:
-    		new_node = Node(value)
-    		new_node.next = self.top
-    		self.top = new_node
+    def push(self, value):
+        self.count += 1
+        if self.top is None:
+            self.top = Node(value)
+        else:
+            new_node = Node(value)
+            new_node.next = self.top
+            self.top = new_node
 
-     
     def pop(self):
         if self.isEmpty():
-        	return
+            return
         self.count -= 1
         popped_node = self.top
         self.top = self.top.next
@@ -91,22 +91,18 @@ class Stack:
 
     def peek(self):
         if self.isEmpty():
-        	return None
+            return None
         else:
-        	return self.top.value
+            return self.top.value
 
 
-
-#=============================================== Part II ==============================================
+# =============================================== Part II ==============================================
 class Calculator:
     def __init__(self):
         self.expr = None
 
-
     def isNumber(self, txt):
         # YOUR CODE STARTS HERE
-
-
 
     def postfix(self, txt):
         '''
@@ -145,14 +141,12 @@ class Calculator:
             >>> x.postfix('2*(5 +3)^ 2+)1  +4(    ')
             'error message'
         '''
-        if not isinstance(txt,str) or len(txt)<=0:
+        if not isinstance(txt, str) or len(txt) <= 0:
             print("Argument error in postfix")
             return None
 
-        postStack=Stack()
+        postStack = Stack()
         # YOUR CODE STARTS HERE
-        
-
 
     @property
     def calculate(self):
@@ -204,10 +198,10 @@ class Calculator:
             'error message'
         '''
 
-        if not isinstance(self.expr,str) or len(self.expr)<=0:
+        if not isinstance(self.expr, str) or len(self.expr) <= 0:
             print("Argument error in calculate")
             return None
 
-        calcStack=Stack()
+        calcStack = Stack()
 
         # YOUR CODE STARTS HERE
