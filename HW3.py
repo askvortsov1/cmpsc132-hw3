@@ -39,7 +39,7 @@ class Stack:
     __repr__ = __str__
 
     def isEmpty(self):
-        if self.top == None:
+        if self.top is None:
             return True
         else:
             return False
@@ -116,7 +116,7 @@ class Calculator:
         reg = re.compile(r"""
             \s* \d*\.?\d+ \s*  # number wrapped by possible whitespace
             | \s* [\(\)\+\*\-\^/] \s*  # Operator wrapped by possible whitespace
-        """ , re.VERBOSE)
+        """, re.VERBOSE)
         elements = [re.sub(r'\s*', "", i) for i in re.findall(reg, txt)]  # Comprehension to remove whitespace
         if len(elements) == 0 or elements[0] in "^*/+-" or elements[-1] in "^*/+-":
             if elements[0] == "-" and self.isNumber(elements[1]):
