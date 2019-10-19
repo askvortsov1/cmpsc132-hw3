@@ -6,6 +6,7 @@ Team members:
 Collaboration Statement:             
 
 '''
+import re
 
 
 class Node:
@@ -77,7 +78,13 @@ class Calculator:
         self.expr = None
 
     def isNumber(self, txt):
-        # YOUR CODE STARTS HERE
+        txt = re.sub(r'^\s+|\s+$', "", txt)
+        try:
+            float(txt)
+            return True
+        except Exception:
+            return False
+
 
     def postfix(self, txt):
         if not isinstance(txt, str) or len(txt) <= 0:

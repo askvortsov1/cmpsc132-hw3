@@ -16,6 +16,14 @@ class TestStack:
 
 
 class TestCalculator:
+    def test_is_number(self):
+        x = Calculator()
+        assert x.isNumber('hello') is False
+        assert x.isNumber('1.2') is True
+        assert x.isNumber('1.2.3') is False
+        assert x.isNumber('    13   ') is True
+        assert x.isNumber('    12   3') is False
+
     def test_postfix_doctest(self):
         x = Calculator()
         assert x.postfix(' 2 ^        4') == '2.0 4.0 ^'
