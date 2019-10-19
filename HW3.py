@@ -82,6 +82,7 @@ class Calculator:
         precedence_mapping = {
             None: 0,
             "(": 0,
+            ")": 0,
             "+": 1,
             "-": 1,
             "*": 2,
@@ -118,19 +119,22 @@ class Calculator:
             | \s* [\(\)\+\*\-\^/] \s*  # Operator wrapped by possible whitespace
         """, re.VERBOSE)
         elements = [re.sub(r'\s*', "", i) for i in re.findall(reg, txt)]  # Comprehension to remove whitespace
+        # Ensure that expression has elements, and that doesn't end or start with improper operator
         if len(elements) == 0 or elements[0] in "^*/+-" or elements[-1] in "^*/+-":
+            # If starts with - but followed by number, means negative number
             if elements[0] == "-" and self.isNumber(elements[1]):
-                pass
+                elements[0] += elements[1]
+                elements.pop(1)
             else:
                 return None
         # Iterate through and validate against consequent operators, consequent numbers
         i = 1
         while i < len(elements):
             # If start or open parenthese followed by minus then number, that means negative number
-            if (i == 1 or elements[i - 2] == "(") and elements[i - 1] == "-" and self.isNumber(elements[i]):
+            if i > 1 and elements[i - 2] == "(" and elements[i - 1] == "-" and self.isNumber(elements[i]):
                 elements[i - 1] += elements[i]
                 elements.pop(i)
-            # Assess consequent operators
+            # Check for consequent operators
             if elements[i - 1] in "(^*/+-" and elements[i] in "^*/+-":
                 # If extra credit and second operator is minus followed by number, merge into negative
                 if self.extra_credit and elements[i] == "-" and i < len(elements) - 1 and self.isNumber(elements[i + 1]):
@@ -177,29 +181,23 @@ class Calculator:
         postStack = Stack()
         postList = []
         for element in elements:
+            # Append numbers to list immediately
             if self.isNumber(element):
                 postList.append(str(float(element)))
+            # Process operators
             elif self.isOperator(element):
                 if element == "(":
                     postStack.push(element)
-                elif element == ")":
-                    while not postStack.isEmpty():
-                        if postStack.peek() == "(":
-                            postStack.pop()
-                            break
-                        else:
-                            postList.append(postStack.pop())
                 elif self._compare_precedence(element, postStack.peek()) <= 0:
                     while not self._compare_precedence(element, postStack.peek()) > 0:
                         if postStack.peek() == "(":
                             if element == ")":
                                 postStack.pop()
-                            else:
-                                pass
                             break
                         else:
                             postList.append(postStack.pop())
-                    postStack.push(element)
+                    if element != ")":
+                        postStack.push(element)
                 else:
                     postStack.push(element)
             else:

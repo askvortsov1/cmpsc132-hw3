@@ -52,18 +52,18 @@ class TestCalculator:
 
     def test_postfix_doctest(self):
         x = Calculator()
-        # assert x.postfix(' 2 ^        4') == '2.0 4.0 ^'
-        # assert x.postfix('2') == '2.0'
-        # assert x.postfix('2.1*5+3^2+1+4.45') == '2.1 5.0 * 3.0 2.0 ^ + 1.0 + 4.45 +'
-        # assert x.postfix('    2 *       5.34        +       3      ^ 2    + 1+4   ') == '2.0 5.34 * 3.0 2.0 ^ + 1.0 + 4.0 +'
-        # assert x.postfix(' 2.1 *      5   +   3    ^ 2+ 1  +     4') == '2.1 5.0 * 3.0 2.0 ^ + 1.0 + 4.0 +'
-        # assert x.postfix('(2.5)') == '2.5'
-        # assert x.postfix('((2))') == '2.0'
-        # assert x.postfix('     -2 *  ((  5   +   3)    ^ 2+(1  +4))    ') == '-2.0 5.0 3.0 + 2.0 ^ 1.0 4.0 + + *'
-        # assert x.postfix('  (   2 *  ((  5   +   3)    ^ 2+(1  +4)))    ') == '2.0 5.0 3.0 + 2.0 ^ 1.0 4.0 + + *'
-        # assert x.postfix('  ((   2 *  ((  5   +   3)    ^ 2+(1  +4))))    ') == '2.0 5.0 3.0 + 2.0 ^ 1.0 4.0 + + *'
-        # assert x.postfix('   2 *  (  5   +   3)    ^ 2+(1  +4)    ') == '2.0 5.0 3.0 + 2.0 ^ * 1.0 4.0 + +'
-        # assert x.postfix(' 23 / 12 - 223 +      5.25 * 4    *      3423') == '23.0 12.0 / 223.0 - 5.25 4.0 * 3423.0 * +'
+        assert x.postfix(' 2 ^        4') == '2.0 4.0 ^'
+        assert x.postfix('2') == '2.0'
+        assert x.postfix('2.1*5+3^2+1+4.45') == '2.1 5.0 * 3.0 2.0 ^ + 1.0 + 4.45 +'
+        assert x.postfix('    2 *       5.34        +       3      ^ 2    + 1+4   ') == '2.0 5.34 * 3.0 2.0 ^ + 1.0 + 4.0 +'
+        assert x.postfix(' 2.1 *      5   +   3    ^ 2+ 1  +     4') == '2.1 5.0 * 3.0 2.0 ^ + 1.0 + 4.0 +'
+        assert x.postfix('(2.5)') == '2.5'
+        assert x.postfix('((2))') == '2.0'
+        assert x.postfix('     -2 *  ((  5   +   3)    ^ 2+(1  +4))    ') == '-2.0 5.0 3.0 + 2.0 ^ 1.0 4.0 + + *'
+        assert x.postfix('  (   2 *  ((  5   +   3)    ^ 2+(1  +4)))    ') == '2.0 5.0 3.0 + 2.0 ^ 1.0 4.0 + + *'
+        assert x.postfix('  ((   2 *  ((  5   +   3)    ^ 2+(1  +4))))    ') == '2.0 5.0 3.0 + 2.0 ^ 1.0 4.0 + + *'
+        assert x.postfix('   2 *  (  5   +   3)    ^ 2+(1  +4)    ') == '2.0 5.0 3.0 + 2.0 ^ * 1.0 4.0 + +'
+        assert x.postfix(' 23 / 12 - 223 +      5.25 * 4    *      3423') == '23.0 12.0 / 223.0 - 5.25 4.0 * 3423.0 * +'
         assert x.postfix('2 *    5   +   3    ^ -2       +1  +4') is None
         assert x.postfix('2    5') is None
         assert x.postfix('25 +') is None
